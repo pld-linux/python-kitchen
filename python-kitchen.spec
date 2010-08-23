@@ -4,7 +4,7 @@
 
 %define 	module	kitchen
 %define		subver	a2
-%define		rel		1
+%define		rel		2
 Summary:	Small, useful pieces of code to make Python coding easier
 Name:		python-%{module}
 Version:	0.2
@@ -66,6 +66,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYING README NEWS COPYING.LESSER docs
+%dir %{py_sitescriptdir}/kitchen
 %{py_sitescriptdir}/kitchen/*.py[co]
 %{py_sitescriptdir}/kitchen/collections
 %{py_sitescriptdir}/kitchen/i18n
