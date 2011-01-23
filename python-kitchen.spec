@@ -15,6 +15,8 @@ URL:		https://fedorahosted.org/kitchen/
 Source0:	https://fedorahosted.org/releases/k/i/kitchen/%{module}-%{version}%{subver}.tar.gz
 # Source0-md5:	54eb68eacf4df9f910aa7533399c986a
 BuildRequires:	python-devel
+BuildRequires:	python-setuptools
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 %if %{with tests}
 BuildRequires:	python-chardet
