@@ -3,18 +3,16 @@
 %bcond_without	tests	# do not perform "make test"
 
 %define 	module	kitchen
-%define		subver	a2
-%define		rel		2
 Summary:	Small, useful pieces of code to make Python coding easier
 Name:		python-%{module}
-Version:	0.2
-Release:	0.%{subver}.%{rel}
+Version:	1.1.1
+Release:	1
 License:	LGPL v2+
 Group:		Development/Languages
+Source0:	https://fedorahosted.org/releases/k/i/kitchen/%{module}-%{version}.tar.gz
+# Source0-md5:	059d7ce048ca1d0fb53e6755145137b0
 URL:		https://fedorahosted.org/kitchen/
-Source0:	https://fedorahosted.org/releases/k/i/kitchen/%{module}-%{version}%{subver}.tar.gz
-# Source0-md5:	54eb68eacf4df9f910aa7533399c986a
-BuildRequires:	python-devel
+BuildRequires:	python-modules >= 2.3.1
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
@@ -23,7 +21,7 @@ BuildRequires:	python-chardet
 BuildRequires:	python-coverage
 BuildRequires:	python-nose
 %endif
-Requires:	python-chardet
+Suggests:	python-chardet
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -31,26 +29,20 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 kitchen includes functions to make gettext easier to use, handling
 unicode text easier (conversion with bytes, outputting xml, and
 calculating how many columns a string takes), and compatibility
-modules for writing code that uses python-2.7 modules but needs to run
-on python-2.3
+modules for writing code that uses Python 2.7 modules but needs to run
+on Python 2.3
 
 %prep
-%setup -q -n %{module}-%{version}%{subver}
+%setup -q -n %{module}-%{version}
 
 # can't find origin of this import
 grep -r 'from test import test_support' tests -l | xargs rm
-
-# these fail for now
-rm tests/test_converters.py
-rm tests/test_i18n.py
-rm tests/test_text_display.py
-rm tests/test_text_utf8.py
 
 %build
 %{__python} setup.py build
 
 %if %{with tests}
-nosetests --with-coverage --cover-package kitchen
+nosetests-%{py_ver} --with-coverage --cover-package kitchen
 %endif
 
 %install
@@ -72,6 +64,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitescriptdir}/kitchen/*.py[co]
 %{py_sitescriptdir}/kitchen/collections
 %{py_sitescriptdir}/kitchen/i18n
+%{py_sitescriptdir}/kitchen/iterutils
 %{py_sitescriptdir}/kitchen/pycompat24
 %{py_sitescriptdir}/kitchen/pycompat25
 %{py_sitescriptdir}/kitchen/pycompat27
