@@ -20,6 +20,9 @@ BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	python-chardet
 BuildRequires:	python-coverage
 BuildRequires:	python-nose
+%if %(locale -a | grep -q '^en_US$'; echo $?)
+BuildRequires:	glibc-localedb-all
+%endif
 %endif
 Suggests:	python-chardet
 BuildArch:	noarch
