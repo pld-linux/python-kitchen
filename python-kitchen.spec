@@ -6,7 +6,7 @@
 Summary:	Small, useful pieces of code to make Python coding easier
 Name:		python-%{module}
 Version:	1.1.1
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Development/Languages
 Source0:	https://fedorahosted.org/releases/k/i/kitchen/%{module}-%{version}.tar.gz
