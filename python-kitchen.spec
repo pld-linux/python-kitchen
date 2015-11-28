@@ -42,7 +42,7 @@ on Python 2.3
 grep -r 'from test import test_support' tests -l | xargs rm
 
 %build
-%{__python} setup.py build
+%py_build
 
 %if %{with tests}
 nosetests-%{py_ver} --with-coverage --cover-package kitchen
@@ -50,10 +50,7 @@ nosetests-%{py_ver} --with-coverage --cover-package kitchen
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__python} setup.py install \
-	--skip-build \
-	--optimize=2 \
-	--root=$RPM_BUILD_ROOT
+%py_install
 
 %py_postclean
 
