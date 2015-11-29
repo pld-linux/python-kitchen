@@ -15,7 +15,7 @@ URL:		https://fedorahosted.org/kitchen/
 BuildRequires:	python-modules >= 2.3.1
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with tests}
 BuildRequires:	python-chardet
 BuildRequires:	python-coverage
